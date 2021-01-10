@@ -1,11 +1,22 @@
 {% extends "base.html" %}
 
 {% block page_content %}
-<h5>City: {{result.city}} </h5></br>
-<h5>Minimum Temperature: {{result.temp_min}} </h5></br>
-<h5>Maximum Temperature: {{result.temp_max}} </h5></br>
-<h5>Pressure: {{result.pressure}} </h5></br>
-<h5>Humidity: {{result.humidity}} </h5></br>
-<h5>Wind Speed and Direction: {{result.wind_speed}}km/h {{result.wind_direction}}</h5></br>
-<h5>Description: {{result.description}}</h5>
+
+<form method="post" action="{% url 'get_current_weather_in_city' %}" class="form-group">
+    {% csrf_token %}
+    <div class="input-group">
+        {{form.as_p}}
+        <button name="save" type="submit" class="btn btn-success">Ask</button>
+    </div>
+</form>
+
+{% if result %}
+    <h5>City: {{result.city}} </h5></br>
+    <h5>Minimum Temperature: {{result.temp_min}} °C</h5></br>
+    <h5>Maximum Temperature: {{result.temp_max}} °C</h5></br>
+    <h5>Pressure: {{result.pressure}} hPa</h5></br>
+    <h5>Humidity: {{result.humidity}} %</h5></br>
+    <h5>Wind Speed and Direction: {{result.wind_speed}}km/h {{result.wind_direction}}</h5></br>
+    <h5>Description: {{result.description}}</h5>
+{% endif %}
 {% endblock %}
