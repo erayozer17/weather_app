@@ -58,6 +58,13 @@ TEMPLATES = [
     },
 ]
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': 'cache:11211',
+    }
+}
+
 WSGI_APPLICATION = 'weather_app.wsgi.application'
 
 LANGUAGE_CODE = 'en-us'
