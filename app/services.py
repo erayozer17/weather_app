@@ -2,8 +2,8 @@ from .consumers import get_weather_for_city
 from .helpers import get_cache_or_call
 
 
-def get_json_for_the_city(city_name):
-    result = get_cache_or_call(city_name, get_weather_for_city, city_name)
+async def get_json_for_the_city(city_name):
+    result = await get_cache_or_call(city_name, get_weather_for_city, city_name)
     return {
         "city": city_name,
         "temp": result["main"]["temp"],

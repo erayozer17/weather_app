@@ -15,11 +15,11 @@ def _get_caching_time():
     return caching_times[environ_value] * coefficient
 
 
-def get_cache_or_call(cache_key, func, *args):
+async def get_cache_or_call(cache_key, func, *args):
     cache_key = cache_key.lower()
     cache_time = _get_caching_time()
     result = cache.get(cache_key)
     if not result:
-        result = func(*args)
+        result = await func(*args)
         cache.set(cache_key, result, cache_time)
     return result
