@@ -13,3 +13,19 @@ async def get_current_weather_in_city(request):
     else:
         form = CityForm()
         return render(request, "weather_forecast.html", {"form": form})
+
+
+def custom_page_not_found_view(request, exception):
+    return render(request, "errors/404.html", {"message": exception})
+
+
+def custom_error_view(request, exception=None):
+    return render(request, "errors/500.html", {"message": exception})
+
+
+def custom_permission_denied_view(request, exception=None):
+    return render(request, "errors/403.html", {"message": exception})
+
+
+def custom_bad_request_view(request, exception=None):
+    return render(request, "errors/400.html", {"message": exception})
