@@ -8,9 +8,9 @@ install:
 script:
     - flake8
     - docker-compose run --rm api python manage.py test
-deploy:
-    provider: script
-    script: bash docker_push.sh
-    skip_cleanup: true
-    on:
-        branch: master
+# deploy:
+#     provider: script
+#     script: bash docker_push.sh
+#     skip_cleanup: true
+#     on:
+#         branch: master
