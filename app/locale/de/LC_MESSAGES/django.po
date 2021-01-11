@@ -31,25 +31,29 @@ msgid "City"
 msgstr "Stadt"
 
 #: templates/weather_forecast.html:17
+msgid "Temperature"
+msgstr "Temperature"
+
+#: templates/weather_forecast.html:18
 msgid "Minimum Temperature"
 msgstr "Minimale Temperatur"
 
-#: templates/weather_forecast.html:18
+#: templates/weather_forecast.html:19
 msgid "Maximum Temperature"
 msgstr "Maximale Temperatur"
 
-#: templates/weather_forecast.html:19
+#: templates/weather_forecast.html:20
 msgid "Pressure"
 msgstr "Druck"
 
-#: templates/weather_forecast.html:20
+#: templates/weather_forecast.html:21
 msgid "Humidity"
 msgstr "Luftfeuchtigkeit"
 
-#: templates/weather_forecast.html:21
+#: templates/weather_forecast.html:22
 msgid "Wind Speed And Direction"
 msgstr "Windgeschwindigkeit und -richtung"
 
-#: templates/weather_forecast.html:22
+#: templates/weather_forecast.html:23
 msgid "Description"
 msgstr "Beschreibung"

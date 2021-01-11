@@ -31,25 +31,29 @@ msgid "City"
 msgstr "Sehir"
 
 #: templates/weather_forecast.html:17
+msgid "Temperature"
+msgstr "Sicaklik"
+
+#: templates/weather_forecast.html:18
 msgid "Minimum Temperature"
 msgstr "En dusuk"
 
-#: templates/weather_forecast.html:18
+#: templates/weather_forecast.html:19
 msgid "Maximum Temperature"
 msgstr "En yuksek"
 
-#: templates/weather_forecast.html:19
+#: templates/weather_forecast.html:20
 msgid "Pressure"
 msgstr "Basinc"
 
-#: templates/weather_forecast.html:20
+#: templates/weather_forecast.html:21
 msgid "Humidity"
 msgstr "Nem"
 
-#: templates/weather_forecast.html:21
+#: templates/weather_forecast.html:22
 msgid "Wind Speed And Direction"
 msgstr "Ruzgar siddeti ve yonu"
 
-#: templates/weather_forecast.html:22
+#: templates/weather_forecast.html:23
 msgid "Description"
 msgstr "Aciklama"

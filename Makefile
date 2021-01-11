@@ -1,2 +1,5 @@
 run:
-	pip freeze > requirements.txt && cd app && django-admin compilemessages && cd .. && docker-compose up -d --build
+	cd app && django-admin compilemessages && cd .. && docker-compose up -d --build
+
+stop:
+	docker-compose down -v

@@ -6,6 +6,7 @@ def get_json_for_the_city(city_name):
     result = get_cache_or_call(city_name, get_weather_for_city, city_name)
     return {
         "city": city_name,
+        "temp": result["main"]["temp"],
         "temp_min": result["main"]["temp_min"],
         "temp_max": result["main"]["temp_max"],
         "pressure": result["main"]["pressure"],
@@ -16,7 +17,7 @@ def get_json_for_the_city(city_name):
     }
 
 def _get_wind_direction(degree):
-    if degree > 360:
+    if degree >= 360:
         degree = degree % 360
     directions = ["N", "E", "E", "S", "S", "W", "W", "N"]
     direction = degree // 45
