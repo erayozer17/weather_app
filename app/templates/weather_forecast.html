@@ -2,21 +2,23 @@
 
 {% block page_content %}
 
+{% load i18n %}
+
 <form method="post" action="{% url 'get_current_weather_in_city' %}" class="form-group">
     {% csrf_token %}
     <div class="input-group">
         {{form.as_p}}
-        <button name="save" type="submit" class="btn btn-success">Ask</button>
+        <button name="save" type="submit" class="btn btn-success">{% trans 'Ask' %}</button>
     </div>
 </form>
 
 {% if result %}
-    <h5>City: {{result.city}} </h5></br>
-    <h5>Minimum Temperature: {{result.temp_min}} °C</h5></br>
-    <h5>Maximum Temperature: {{result.temp_max}} °C</h5></br>
-    <h5>Pressure: {{result.pressure}} hPa</h5></br>
-    <h5>Humidity: {{result.humidity}} %</h5></br>
-    <h5>Wind Speed and Direction: {{result.wind_speed}}km/h {{result.wind_direction}}</h5></br>
-    <h5>Description: {{result.description}}</h5>
+    <h5>{% trans 'City' %}: {{result.city}} </h5></br>
+    <h5>{% trans 'Minimum Temperature' %}: {{result.temp_min}} °C</h5></br>
+    <h5>{% trans 'Maximum Temperature' %}: {{result.temp_max}} °C</h5></br>
+    <h5>{% trans 'Pressure' %}: {{result.pressure}} hPa</h5></br>
+    <h5>{% trans 'Humidity' %}: {{result.humidity}} %</h5></br>
+    <h5>{% trans 'Wind Speed And Direction' %}: {{result.wind_speed}}km/h {{result.wind_direction}}</h5></br>
+    <h5>{% trans 'Description' %}: {{result.description}}</h5>
 {% endif %}
 {% endblock %}

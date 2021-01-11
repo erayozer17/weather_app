@@ -1,0 +1,55 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-01-11 02:31+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: models.py:5
+msgid "City Name"
+msgstr "Stadt Name"
+
+#: templates/weather_forecast.html:11
+msgid "Ask"
+msgstr "Frag"
+
+#: templates/weather_forecast.html:16
+msgid "City"
+msgstr "Stadt"
+
+#: templates/weather_forecast.html:17
+msgid "Minimum Temperature"
+msgstr "Minimale Temperatur"
+
+#: templates/weather_forecast.html:18
+msgid "Maximum Temperature"
+msgstr "Maximale Temperatur"
+
+#: templates/weather_forecast.html:19
+msgid "Pressure"
+msgstr "Druck"
+
+#: templates/weather_forecast.html:20
+msgid "Humidity"
+msgstr "Luftfeuchtigkeit"
+
+#: templates/weather_forecast.html:21
+msgid "Wind Speed And Direction"
+msgstr "Windgeschwindigkeit und -richtung"
+
+#: templates/weather_forecast.html:22
+msgid "Description"
+msgstr "Beschreibung"
