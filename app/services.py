@@ -16,6 +16,7 @@ async def get_json_for_the_city(city_name):
         "description": result["weather"][0]["description"].capitalize()
     }
 
+
 def _get_wind_direction(degree):
     if degree >= 360:
         degree = degree % 360

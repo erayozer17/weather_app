@@ -1,5 +1,4 @@
 from pathlib import Path
-import os
 import environ
 
 from .helpers import get_env_value
