@@ -1,4 +1,4 @@
-from .helpers import get_env_value
+from weather_app.helpers import get_env_value
 import requests
 
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather"

@@ -1,13 +1,7 @@
 from django.core.exceptions import ImproperlyConfigured
 from django.core.cache import cache
-import os
 
-def get_env_value(env_variable):
-    try:
-      	return os.environ[env_variable]
-    except KeyError:
-        error_msg = 'Set the {} environment variable'.format(env_variable)
-        raise ImproperlyConfigured(error_msg)
+from weather_app.helpers import get_env_value
 
 
 def _get_caching_time():
@@ -22,10 +16,10 @@ def _get_caching_time():
 
 
 def get_cache_or_call(cache_key, func, *args):
-    cache_key_lower = cache_key.lower()
+    cache_key = cache_key.lower()
     cache_time = _get_caching_time()
-    result = cache.get(cache_key_lower)
+    result = cache.get(cache_key)
     if not result:
         result = func(*args)
-        cache.set(cache_key_lower, result, cache_time)
+        cache.set(cache_key, result, cache_time)
     return result

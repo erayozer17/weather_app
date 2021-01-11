@@ -2,7 +2,7 @@ from pathlib import Path
 import os
 import environ
 
-from app.helpers import get_env_value
+from .helpers import get_env_value
 
 env = environ.Env()
 
