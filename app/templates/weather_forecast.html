@@ -3,23 +3,30 @@
 {% block page_content %}
 
 {% load i18n %}
+<div class="container">
+  <div class="row">
+    <div class="col"></div>
+    <div class="col">
+        <form method="post" action="{% url 'get_current_weather_in_city' %}" class="form-inline">
+            {% csrf_token %}
+            <div class="form-group mx-sm-3 mb-2">
+                {{form.as_p}}
+            </div>
+            <button name="save" type="submit" class="btn btn-success mb-2">{% trans 'Ask' %}</button>
+        </form>
 
-<form method="post" action="{% url 'get_current_weather_in_city' %}" class="form-group">
-    {% csrf_token %}
-    <div class="input-group">
-        {{form.as_p}}
-        <button name="save" type="submit" class="btn btn-success">{% trans 'Ask' %}</button>
+        {% if result %}
+            <p class="text-center">{% trans 'City' %}: {{result.city}} </p></br>
+            <p class="text-center">{% trans 'Temperature' %}: {{result.temp}} °C</p></br>
+            <p class="text-center">{% trans 'Minimum Temperature' %}: {{result.temp_min}} °C</p></br>
+            <p class="text-center">{% trans 'Maximum Temperature' %}: {{result.temp_max}} °C</p></br>
+            <p class="text-center">{% trans 'Pressure' %}: {{result.pressure}} hPa</p></br>
+            <p class="text-center">{% trans 'Humidity' %}: {{result.humidity}} %</p></br>
+            <p class="text-center">{% trans 'Wind Speed And Direction' %}: {{result.wind_speed}}km/h {{result.wind_direction}}</p></br>
+            <p class="text-center">{% trans 'Description' %}: {{result.description}}</p>
+        {% endif %}
     </div>
-</form>
-
-{% if result %}
-    <h5>{% trans 'City' %}: {{result.city}} </h5></br>
-    <h5>{% trans 'Temperature' %}: {{result.temp}} °C</h5></br>
-    <h5>{% trans 'Minimum Temperature' %}: {{result.temp_min}} °C</h5></br>
-    <h5>{% trans 'Maximum Temperature' %}: {{result.temp_max}} °C</h5></br>
-    <h5>{% trans 'Pressure' %}: {{result.pressure}} hPa</h5></br>
-    <h5>{% trans 'Humidity' %}: {{result.humidity}} %</h5></br>
-    <h5>{% trans 'Wind Speed And Direction' %}: {{result.wind_speed}}km/h {{result.wind_direction}}</h5></br>
-    <h5>{% trans 'Description' %}: {{result.description}}</h5>
-{% endif %}
+    <div class="col"></div>
+  </div>
+</div>
 {% endblock %}
