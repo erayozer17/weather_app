@@ -42,7 +42,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'weather_app.urls'
+ROOT_URLCONF = 'weather_project.urls'
 
 TEMPLATES = [
     {
@@ -65,7 +65,7 @@ CACHES = {
     }
 }
 
-WSGI_APPLICATION = 'weather_app.wsgi.application'
+WSGI_APPLICATION = 'weather_project.wsgi.application'
 
 LANGUAGE_CODE = 'en-us'
 

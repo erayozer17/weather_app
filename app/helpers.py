@@ -1,7 +1,7 @@
 from django.core.exceptions import ImproperlyConfigured
 from django.core.cache import cache
 
-from weather_app.helpers import get_env_value
+from weather_project.helpers import get_env_value
 
 
 def get_caching_time():

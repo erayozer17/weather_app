@@ -1,4 +1,4 @@
-from weather_app.helpers import get_env_value
+from weather_project.helpers import get_env_value
 import httpx
 
 
