@@ -1,12 +1,13 @@
 import asyncio
 import unittest
 from unittest import mock
+from parameterized import parameterized
 
 from django.test import SimpleTestCase
 from django.urls import reverse
 
 from .forms import CityForm
-from .services import get_json_for_the_city
+from .services import get_json_for_the_city, get_wind_direction
 
 
 class TestForm(unittest.TestCase):
@@ -79,7 +80,7 @@ class TestService(unittest.TestCase):
     def _run(self, coro):
         return asyncio.get_event_loop().run_until_complete(coro)
 
-    def AsyncMock(*args, **kwargs):
+    def asyncMock(*args, **kwargs):
         m = mock.MagicMock(*args, **kwargs)
 
         async def mock_coro(*args, **kwargs):
@@ -88,7 +89,7 @@ class TestService(unittest.TestCase):
         mock_coro.mock = m
         return mock_coro
 
-    @mock.patch("app.services.get_cache_or_call", new=AsyncMock(return_value=expected_result_from_api))
+    @mock.patch("app.services.get_cache_or_call", new=asyncMock(return_value=expected_result_from_api))
     def test_get_json_for_the_city(self):
         res = self._run(get_json_for_the_city("Cologne"))
         expected = {
@@ -103,3 +104,14 @@ class TestService(unittest.TestCase):
             "description": "Clear sky"
         }
         self.assertEqual(res, expected)
+
+    @parameterized.expand([
+        [0, "N"], [23, "N"],
+        [45, "E"], [95, "E"],
+        [180, "S"], [224, "S"],
+        [285, "W"], [234, "W"],
+        [324, "N"], [360, "N"],
+        [410, "E"], [560, "S"],
+    ])
+    def test_get_wind_direction(self, degree, expected):
+        self.assertEqual(get_wind_direction(degree), expected)

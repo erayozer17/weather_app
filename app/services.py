@@ -15,7 +15,7 @@ async def get_json_for_the_city(city_name):
             "pressure": result["main"]["pressure"],
             "humidity": result["main"]["humidity"],
             "wind_speed": result["wind"]["speed"],
-            "wind_direction": _get_wind_direction(result["wind"]["deg"]),
+            "wind_direction": get_wind_direction(result["wind"]["deg"]),
             "description": result["weather"][0]["description"].capitalize()
         }
     except KeyError:
@@ -24,7 +24,7 @@ async def get_json_for_the_city(city_name):
         raise HttpResponseServerError()
 
 
-def _get_wind_direction(degree):
+def get_wind_direction(degree):
     if degree >= 360:
         degree = degree % 360
     directions = ["N", "E", "E", "S", "S", "W", "W", "N"]
