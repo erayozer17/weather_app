@@ -2,12 +2,15 @@ import asyncio
 import unittest
 from unittest import mock
 from parameterized import parameterized
+import os
 
 from django.test import SimpleTestCase
 from django.urls import reverse
+from django.core.exceptions import ImproperlyConfigured
 
 from .forms import CityForm
 from .services import get_json_for_the_city, get_wind_direction
+from .helpers import get_caching_time
 
 
 class TestForm(unittest.TestCase):
@@ -115,3 +118,18 @@ class TestService(unittest.TestCase):
     ])
     def test_get_wind_direction(self, degree, expected):
         self.assertEqual(get_wind_direction(degree), expected)
+
+
+class TestHelpers(unittest.TestCase):
+
+    def test_get_caching_time(self):
+        os.environ["CACHING_TIME"] = "0"
+        self.assertEqual(get_caching_time(), 5*60)
+        os.environ["CACHING_TIME"] = "1"
+        self.assertEqual(get_caching_time(), 10*60)
+        os.environ["CACHING_TIME"] = "2"
+        self.assertEqual(get_caching_time(), 60*60)
+        os.environ["CACHING_TIME"] = "a"
+        self.assertRaises(ImproperlyConfigured, get_caching_time)
+        os.environ["CACHING_TIME"] = "3"
+        self.assertRaises(ImproperlyConfigured, get_caching_time)
