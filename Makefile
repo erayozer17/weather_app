@@ -5,4 +5,4 @@ stop:
 	docker-compose down -v
 
 test:
-	flake8 && docker-compose run --rm api python manage.py test
+	docker-compose run --rm api flake8 && docker-compose run --rm api python manage.py test

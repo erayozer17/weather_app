@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/erayozer17/weather_app.svg?branch=master)](https://travis-ci.com/erayozer17/weather_app)
+
 # Weather App with OpenWeatherMap
 
 ## Prerequisites
