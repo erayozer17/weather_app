@@ -1,13 +1,20 @@
-language: python
-
-python:
-  - 3.9
+sudo: required
 
 services:
   - docker
 
-before_script: pip install docker-compose
+env:
+  DOCKER_COMPOSE_VERSION: 1.18.0
 
+before_install:
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+before_script:
+  - docker-compose up --build -d
 script:
-  - flake8
   - docker-compose run api python manage.py test
+  - docker-compose run api flake8
+after_script:
+  - docker-compose down
