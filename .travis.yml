@@ -12,7 +12,6 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 before_script:
-  - export SECRET_KEY=dummy_secret_key
   - docker-compose up --build -d
 script:
   - docker-compose run api python manage.py test

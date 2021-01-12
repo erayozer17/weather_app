@@ -7,6 +7,10 @@ services:
     command: uvicorn weather_project.asgi:application --host 0.0.0.0 --port 8000
     ports:
       - "8000:8000"
+    environment:
+      - SECRET_KEY
+      - OPEN_WEATHER_API_KEY
+      - CACHING_TIME
     depends_on:
       - cache
   cache:
