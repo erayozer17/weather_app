@@ -27,3 +27,11 @@ async def get_cache_or_call(cache_key, func, *args):
         result = await func(*args)
         cache.set(cache_key, result, cache_time)
     return result
+
+
+def get_wind_direction(degree):
+    if degree >= 360:
+        degree = degree % 360
+    directions = ["N", "E", "E", "S", "S", "W", "W", "N"]
+    direction = degree // 45
+    return directions[direction]

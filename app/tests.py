@@ -9,8 +9,8 @@ from django.urls import reverse
 from django.core.exceptions import ImproperlyConfigured
 
 from .forms import CityForm
-from .services import get_json_for_the_city, get_wind_direction
-from .helpers import get_caching_time
+from .services import get_json_for_the_city
+from .helpers import get_caching_time, get_wind_direction
 
 
 class TestForm(unittest.TestCase):
@@ -108,6 +108,9 @@ class TestService(unittest.TestCase):
         }
         self.assertEqual(res, expected)
 
+
+class TestHelpers(unittest.TestCase):
+
     @parameterized.expand([
         [0, "N"], [23, "N"],
         [45, "E"], [95, "E"],
@@ -118,9 +121,6 @@ class TestService(unittest.TestCase):
     ])
     def test_get_wind_direction(self, degree, expected):
         self.assertEqual(get_wind_direction(degree), expected)
-
-
-class TestHelpers(unittest.TestCase):
 
     def test_get_caching_time(self):
         os.environ["CACHING_TIME"] = "0"

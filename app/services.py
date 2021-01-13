@@ -1,7 +1,7 @@
 from django.http import Http404, HttpResponseServerError
 
 from .consumers import get_weather_for_city
-from .helpers import get_cache_or_call
+from .helpers import get_cache_or_call, get_wind_direction
 
 
 async def get_json_for_the_city(city_name):
@@ -22,11 +22,3 @@ async def get_json_for_the_city(city_name):
         raise Http404("Requested city not found.")
     except Exception:
         raise HttpResponseServerError()
-
-
-def get_wind_direction(degree):
-    if degree >= 360:
-        degree = degree % 360
-    directions = ["N", "E", "E", "S", "S", "W", "W", "N"]
-    direction = degree // 45
-    return directions[direction]
