@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col"></div>
+    <div class="col text-center">
+        <img src="https://i.pinimg.com/originals/3e/52/39/3e523990d87b8d452e4603ea4bf47adf.gif"/>
+        {% block error_content%}{% endblock %}
+    </div>
+    <div class="col"></div>
+  </div>
+
+  <div class="row">
+    <div class="col"></div>
+    <div class="col text-center">
+        <button type="button" class="btn btn-info" onClick="window.history.back();return false;">Go Back</button>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>
+{% endblock %}

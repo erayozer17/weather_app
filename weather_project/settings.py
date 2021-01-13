@@ -1,5 +1,6 @@
 from pathlib import Path
 import environ
+import os
 
 from .helpers import get_env_value
 
@@ -47,7 +48,7 @@ ROOT_URLCONF = 'weather_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['app/templates/'],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

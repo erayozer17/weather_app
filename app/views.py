@@ -19,24 +19,24 @@ async def get_current_weather_in_city(request):
 
 
 def custom_page_not_found_view(request, exception):
-    response = render(request, "errors/404.html", {"message": exception})
+    response = render(request, "404.html", {"message": exception})
     response.status_code = 404
     return response
 
 
 def custom_error_view(request, exception=None):
-    response = render(request, "errors/500.html", {"message": exception})
+    response = render(request, "500.html", {"message": exception})
     response.status_code = 500
     return response
 
 
 def custom_permission_denied_view(request, exception=None):
-    response = render(request, "errors/403.html", {"message": exception})
+    response = render(request, "403.html", {"message": exception})
     response.status_code = 403
     return response
 
 
 def custom_bad_request_view(request, exception=None):
-    response = render(request, "errors/400.html", {"message": exception})
+    response = render(request, "400.html", {"message": exception})
     response.status_code = 400
     return response
