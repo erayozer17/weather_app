@@ -57,3 +57,7 @@ msgstr "Ruzgar siddeti ve yonu"
 #: templates/weather_forecast.html:23
 msgid "Description"
 msgstr "Aciklama"
+
+#: templates/base_error.html:23
+msgid "Go Back"
+msgstr "Geri"

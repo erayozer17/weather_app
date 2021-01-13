@@ -57,3 +57,7 @@ msgstr "Windgeschwindigkeit und -richtung"
 #: templates/weather_forecast.html:23
 msgid "Description"
 msgstr "Beschreibung"
+
+#: templates/base_error.html:23
+msgid "Go Back"
+msgstr "Zurück"
