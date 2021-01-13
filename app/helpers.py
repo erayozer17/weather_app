@@ -19,7 +19,7 @@ def get_caching_time():
 
 
 async def get_cache_or_call(cache_key, func, *args):
-    cache_key = cache_key.replace(" ", "_") 
+    cache_key = cache_key.replace(" ", "_")
     cache_key = cache_key.lower()
     cache_time = get_caching_time()
     result = cache.get(cache_key)
