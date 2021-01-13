@@ -10,7 +10,7 @@ async def get_current_weather_in_city(request):
         form = CityForm(request.POST)
         if(not form.is_valid()):
             raise SuspiciousOperation("name field cannot be empty.")
-        city_name = form["name"].value()
+        city_name = form.cleaned_data["name"]
         result = await get_json_for_the_city(city_name)
         return render(request, "weather_forecast.html", {"result": result, "form": form})
     else:
