@@ -4,14 +4,32 @@ from unittest import mock
 from parameterized import parameterized
 import os
 
-from django.test import SimpleTestCase
+from django.test import SimpleTestCase, override_settings
 from django.urls import reverse
 from django.core.exceptions import ImproperlyConfigured
+from django.core.cache import cache
+from freezegun import freeze_time
 
 from .forms import CityForm
 from .services import get_json_for_the_city
-from .helpers import get_caching_time
+from .helpers import get_caching_time, get_cache_or_call
 from .models import WeatherResult
+
+
+class Helpers:
+    @staticmethod
+    def _run(coro):
+        return asyncio.get_event_loop().run_until_complete(coro)
+
+    @staticmethod
+    def asyncMock(*args, **kwargs):
+        m = mock.MagicMock(*args, **kwargs)
+
+        async def mock_coro(*args, **kwargs):
+            return m(*args, **kwargs)
+
+        mock_coro.mock = m
+        return mock_coro
 
 
 class TestForm(unittest.TestCase):
@@ -82,21 +100,9 @@ class TestService(unittest.TestCase):
         "name": "Cologne",
     }
 
-    def _run(self, coro):
-        return asyncio.get_event_loop().run_until_complete(coro)
-
-    def asyncMock(*args, **kwargs):
-        m = mock.MagicMock(*args, **kwargs)
-
-        async def mock_coro(*args, **kwargs):
-            return m(*args, **kwargs)
-
-        mock_coro.mock = m
-        return mock_coro
-
-    @mock.patch("app.services.get_cache_or_call", new=asyncMock(return_value=expected_result_from_api))
+    @mock.patch("app.services.get_cache_or_call", new=Helpers.asyncMock(return_value=expected_result_from_api))
     def test_get_json_for_the_city(self):
-        res = self._run(get_json_for_the_city("Cologne"))
+        res = Helpers._run(get_json_for_the_city("Cologne"))
         expected = WeatherResult(
             "Cologne",
             282.55,
@@ -124,6 +130,23 @@ class TestHelpers(unittest.TestCase):
         self.assertRaises(ImproperlyConfigured, get_caching_time)
         os.environ["CACHING_TIME"] = "3"
         self.assertRaises(ImproperlyConfigured, get_caching_time)
+
+    @override_settings(
+        CACHES={
+            'default': {
+                'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+                'LOCATION': 'test-cache'}
+            }
+        )
+    @mock.patch("django.core.cache.cache.set")
+    def test_get_cache_when_not_expired(self, mock):
+        mock_get_weather_for_city = {"mocked": "mocked_value"}
+        os.environ["CACHING_TIME"] = "0"
+        with freeze_time("2021-01-14 12:00:01"):
+            cache.set("key", mock_get_weather_for_city, 300)
+        with freeze_time("2021-01-14 12:05:00"):
+            get_cache_or_call("key", lambda x: x, "key")
+            mock.assert_called_once()
 
 
 class TestModels(unittest.TestCase):
