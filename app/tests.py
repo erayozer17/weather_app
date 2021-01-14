@@ -10,7 +10,8 @@ from django.core.exceptions import ImproperlyConfigured
 
 from .forms import CityForm
 from .services import get_json_for_the_city
-from .helpers import get_caching_time, get_wind_direction
+from .helpers import get_caching_time
+from .models import WeatherResult
 
 
 class TestForm(unittest.TestCase):
@@ -111,17 +112,6 @@ class TestService(unittest.TestCase):
 
 class TestHelpers(unittest.TestCase):
 
-    @parameterized.expand([
-        [0, "N"], [23, "N"],
-        [45, "E"], [95, "E"],
-        [180, "S"], [224, "S"],
-        [285, "W"], [234, "W"],
-        [324, "N"], [360, "N"],
-        [410, "E"], [560, "S"],
-    ])
-    def test_get_wind_direction(self, degree, expected):
-        self.assertEqual(get_wind_direction(degree), expected)
-
     def test_get_caching_time(self):
         os.environ["CACHING_TIME"] = "0"
         self.assertEqual(get_caching_time(), 5*60)
@@ -133,3 +123,15 @@ class TestHelpers(unittest.TestCase):
         self.assertRaises(ImproperlyConfigured, get_caching_time)
         os.environ["CACHING_TIME"] = "3"
         self.assertRaises(ImproperlyConfigured, get_caching_time)
+
+class TestModels(unittest.TestCase):
+    @parameterized.expand([
+        [0, "N"], [23, "N"],
+        [45, "E"], [95, "E"],
+        [180, "S"], [224, "S"],
+        [285, "W"], [234, "W"],
+        [324, "N"], [360, "N"],
+        [410, "E"], [560, "S"],
+    ])
+    def test_get_wind_direction(self, degree, expected):
+        self.assertEqual(WeatherResult.get_wind_direction(degree), expected)
