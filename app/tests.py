@@ -124,6 +124,7 @@ class TestHelpers(unittest.TestCase):
         os.environ["CACHING_TIME"] = "3"
         self.assertRaises(ImproperlyConfigured, get_caching_time)
 
+
 class TestModels(unittest.TestCase):
     @parameterized.expand([
         [0, "N"], [23, "N"],
