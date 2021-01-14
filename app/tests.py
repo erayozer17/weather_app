@@ -97,18 +97,18 @@ class TestService(unittest.TestCase):
     @mock.patch("app.services.get_cache_or_call", new=asyncMock(return_value=expected_result_from_api))
     def test_get_json_for_the_city(self):
         res = self._run(get_json_for_the_city("Cologne"))
-        expected = {
-            "city": "Cologne",
-            "temp": 282.55,
-            "temp_min": 280.37,
-            "temp_max": 284.26,
-            "pressure": 1023,
-            "humidity": 100,
-            "wind_speed": 1.5,
-            "wind_direction": "N",
-            "description": "Clear sky"
-        }
-        self.assertEqual(res, expected)
+        expected = WeatherResult(
+            "Cologne",
+            282.55,
+            280.37,
+            284.26,
+            1023,
+            100,
+            1.5,
+            "N",
+            "Clear sky"
+        )
+        assert(res == expected)
 
 
 class TestHelpers(unittest.TestCase):

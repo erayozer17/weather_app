@@ -40,3 +40,16 @@ class WeatherResult:
         directions = ["N", "E", "E", "S", "S", "W", "W", "N"]
         direction = degree // 45
         return directions[direction]
+
+    def __eq__(self, obj):
+        return (
+            self.city == obj.city and
+            self.temp == obj.temp and
+            self.temp_min == obj.temp_min and
+            self.temp_max == obj.temp_max and
+            self.pressure == obj.pressure and
+            self.humidity == obj.humidity and
+            self.wind_speed == obj.wind_speed and
+            self.wind_direction == obj.wind_direction and
+            self.description == obj.description
+        )
