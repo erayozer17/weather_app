@@ -79,6 +79,7 @@ class TestService(unittest.TestCase):
             "speed": 1.5,
             "deg": 350
         },
+        "name": "Cologne",
     }
 
     def _run(self, coro):
